@@ -1,0 +1,30 @@
+#!/bin/bash
+
+BOOK_NAME=book-in-md-startup.pdf
+cd ..
+mkdir -p latex
+mkdir -p contents/images
+
+cd latex
+cp -rf ../templates/* .
+cp -rf ../contents/images .
+cp -rf ../contents/cover .
+
+multimarkdown -t latex meta.txt ../contents/preface/*.MD -o preface.tex
+multimarkdown -t latex meta.txt ../contents/chapter/*.MD -o chapters.tex
+multimarkdown -t latex meta.txt ../contents/appendix/*.MD -o appendix.tex
+if [ "X$OS" == "XWindows_NT" ]; then
+	echo "windows platform"
+	cp template-win.tex sdcamp.tex
+else
+	echo "unix platform"
+	cp template.tex sdcamp.tex
+fi
+#exit
+xelatex sdcamp.tex
+xelatex sdcamp.tex
+xelatex sdcamp.tex
+cp sdcamp.pdf ../$BOOK_NAME
+echo
+echo
+echo "Done!"
