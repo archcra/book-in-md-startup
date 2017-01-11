@@ -1,5 +1,11 @@
 # book-in-md-startup
 
+## 使用 
+### 准备环境
+
+### 生成PDF
+在scripts目录下，执行mmd2bok
+
 
 Summary: 
 
